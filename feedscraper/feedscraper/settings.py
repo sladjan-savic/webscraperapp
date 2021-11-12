@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'feedscraper.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "web_scraper")),
+        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "postgres")),
         "USER": os.environ.get("SQL_USER", "postgres"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "root"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
