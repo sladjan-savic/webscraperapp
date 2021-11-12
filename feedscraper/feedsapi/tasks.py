@@ -77,3 +77,8 @@ def crawl_intc_feeds():
         )
 
         sleep(3)
+
+
+@app.task(bind=True)
+def debug_task(self):
+    print('Request: {0!r}'.format(self.request))

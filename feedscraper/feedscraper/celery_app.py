@@ -27,7 +27,7 @@ app.conf.beat_schedule = {
     "Scrape INTC feed": {
         "task": "feedsapi.tasks.crawl_intc_feeds",
         "schedule": 60.0,
-    },
+    }
 }
 
 app.autodiscover_tasks()

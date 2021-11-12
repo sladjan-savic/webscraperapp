@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,15 +79,19 @@ WSGI_APPLICATION = 'feedscraper.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'web_scraper',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432'
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
+        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "web_scraper")),
+        "USER": os.environ.get("SQL_USER", "postgres"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "root"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER", "redis://127.0.0.1:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get(
+    "CELERY_BACKEND", "redis://127.0.0.1:6379/0")
 
 
 # Password validation
@@ -137,11 +141,3 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
-
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'CET'
-
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
