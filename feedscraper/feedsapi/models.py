@@ -17,6 +17,7 @@ class Feed(models.Model):
 
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 2
+    page_query_param = "page"
     page_size_query_param = 'pageSize'
-    max_page_size = 100
+    page_size = 100
+    max_page_size = 1000

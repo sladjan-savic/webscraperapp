@@ -21,5 +21,6 @@ from feedsapi import views as feed_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('feeds/', feed_views.FeedListAPIView.as_view(), name="feeds_list"),
-    path('feeds/<int:pk>/', feed_views.FeedDetailAPIView.as_view(), name="feed"),
+    path('feeds/<int:pk>/',
+         feed_views.FeedDetailAPIView.as_view(), name="feed"),
 ]

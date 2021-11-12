@@ -1,7 +1,5 @@
 from time import sleep
 from celery import shared_task
-from celery.schedules import crontab
-from bs4 import BeautifulSoup
 import feedparser as parser
 
 from .models import Feed
@@ -66,7 +64,7 @@ def crawl_gc_gold_feeds():
 @shared_task
 def crawl_intc_feeds():
     print('Crawling intc rss feeds and creating objects in the database')
-    intc_feed = parser.parse(gc_fgold__url)
+    intc_feed = parser.parse(intc_url)
 
     for entry in intc_feed.entries:
         Feed.objects.create(
