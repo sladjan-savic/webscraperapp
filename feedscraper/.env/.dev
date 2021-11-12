@@ -7,7 +7,7 @@ SQL_DATABASE=web_scraper
 SQL_USER=postgres
 SQL_PASSWORD=root
 SQL_HOST=db
-SQL_PORT=5439
+SQL_PORT=5432
 
 CELERY_BROKER=redis://redis:6379/0
 CELERY_BACKEND=redis://redis:6379/0
