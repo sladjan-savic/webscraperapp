@@ -1,5 +1,5 @@
 from time import sleep
-from celery import shared_task
+from feedscraper.celery_app import app
 import feedparser as parser
 
 from .models import Feed
@@ -7,7 +7,7 @@ from .remote_urls import aapl_url, twtr_url, gc_fgold__url, intc_url
 from .string_literals import AAPL, TWTR, GC_GOLD, INTC
 
 
-@shared_task
+@app.task
 def crawl_aapl_feeds():
     print('Crawling aapl rss feeds and creating objects in the database')
     aapl_feed = parser.parse(aapl_url)
@@ -25,7 +25,7 @@ def crawl_aapl_feeds():
         sleep(3)
 
 
-@shared_task
+@app.task
 def crawl_twtr_feeds():
     print('Crawling twtr rss feeds and creating objects in the database')
     twtr_feed = parser.parse(twtr_url)
@@ -43,7 +43,7 @@ def crawl_twtr_feeds():
         sleep(3)
 
 
-@shared_task
+@app.task
 def crawl_gc_gold_feeds():
     print('Crawling gc gold rss feeds and creating objects in the database')
     gc_gold_feed = parser.parse(gc_fgold__url)
@@ -61,7 +61,7 @@ def crawl_gc_gold_feeds():
         sleep(3)
 
 
-@shared_task
+@app.task
 def crawl_intc_feeds():
     print('Crawling intc rss feeds and creating objects in the database')
     intc_feed = parser.parse(intc_url)

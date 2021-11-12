@@ -10,9 +10,9 @@ class FeedListAPIView(generics.ListCreateAPIView):
     queryset = Feed.objects.all()
     serializer_class = FeedSerializer
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
-    ordering_fields = ["title", "published"]
-    ordering = ["title"]
-    search_fields = ["title", "published"]
+    ordering_fields = ["id", "tag", "title"]
+    ordering = ["id", "tag", "title"]
+    search_fields = ["tag"]
     pagination_class = StandardResultsSetPagination
 
 
